@@ -111,3 +111,19 @@ exports.getStoresByTag = async (req, res) => {
     tag,
   });
 };
+
+exports.searchStores = async (req, res) => {
+  // using Mongo's $text, a text search will be performed on fields that were indexed as text
+  const stores = await Store.find(
+    {
+      $text: {
+        $search: req.query.q,
+      },
+    },
+    // organizing results by those who match the query with more letters and/or word ocurreces
+    {
+      score: { $meta: 'textScore' },
+    }
+  ).sort({ score: { $meta: 'textScore' } });
+  res.json(stores);
+};

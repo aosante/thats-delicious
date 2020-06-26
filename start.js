@@ -13,7 +13,9 @@ mongoose
     useFindAndModify: false,
   })
   .then(() => console.log('Connected to MongoDB!'))
-  .catch((err) => console.error(`🙅 🚫 🙅 🚫 🙅 🚫 🙅 🚫 → ${err.message}`));
+  .catch((error) =>
+    console.error(`🙅 🚫 🙅 🚫 🙅 🚫 🙅 🚫 → ${error.message}`)
+  );
 
 // import all of our models
 

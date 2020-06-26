@@ -7,7 +7,7 @@
 */
 
 exports.catchErrors = (fn) => {
-  return function(req, res, next) {
+  return function (req, res, next) {
     return fn(req, res, next).catch(next);
   };
 };
@@ -18,9 +18,9 @@ exports.catchErrors = (fn) => {
   If we hit a route that is not found, we mark it as 404 and pass it along to the next error handler to display
 */
 exports.notFound = (req, res, next) => {
-  const err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+  const error = new Error('Not Found');
+  error.status = 404;
+  next(error);
 };
 
 /*
@@ -29,14 +29,13 @@ exports.notFound = (req, res, next) => {
   Detect if there are mongodb validation errors that we can nicely show via flash messages
 */
 
-exports.flashValidationErrors = (err, req, res, next) => {
-  if (!err.errors) return next(err);
+exports.flashValidationErrors = (error, req, res, next) => {
+  if (!error.errors) return next(error);
   // validation errors look like
-  const errorKeys = Object.keys(err.errors);
-  errorKeys.forEach(key => req.flash('error', err.errors[key].message));
+  const errorKeys = Object.keys(error.errors);
+  errorKeys.forEach((key) => req.flash('error', error.errors[key].message));
   res.redirect('back');
 };
-
 
 /*
   Development Error Handler
@@ -48,7 +47,10 @@ exports.developmentErrors = (err, req, res, next) => {
   const errorDetails = {
     message: err.message,
     status: err.status,
-    stackHighlighted: err.stack.replace(/[a-z_-\d]+.js:\d+:\d+/gi, '<mark>$&</mark>')
+    stackHighlighted: err.stack.replace(
+      /[a-z_-\d]+.js:\d+:\d+/gi,
+      '<mark>$&</mark>'
+    ),
   };
   res.status(err.status || 500);
   res.format({
@@ -56,10 +58,9 @@ exports.developmentErrors = (err, req, res, next) => {
     'text/html': () => {
       res.render('error', errorDetails);
     }, // Form Submit, Reload the page
-    'application/json': () => res.json(errorDetails) // Ajax call, send JSON back
+    'application/json': () => res.json(errorDetails), // Ajax call, send JSON back
   });
 };
-
 
 /*
   Production Error Handler
@@ -70,6 +71,6 @@ exports.productionErrors = (err, req, res, next) => {
   res.status(err.status || 500);
   res.render('error', {
     message: err.message,
-    error: {}
+    error: {},
   });
 };

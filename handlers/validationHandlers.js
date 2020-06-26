@@ -28,7 +28,7 @@ exports.validate = (req, res, next) => {
   if (!errors.isEmpty()) {
     req.flash(
       'error',
-      errors.array().map((err) => err.msg)
+      errors.array().map((error) => error.msg)
     );
     res.render('register', {
       title: 'Register',

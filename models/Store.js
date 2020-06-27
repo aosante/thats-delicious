@@ -47,6 +47,10 @@ storeSchema.index({
   description: 'text',
 });
 
+storeSchema.index({
+  location: '2dsphere',
+});
+
 // using pre-save hook to create unique slugs in case there are repeated ones
 storeSchema.pre('save', async function (next) {
   if (!this.isModified('name')) {

@@ -127,3 +127,25 @@ exports.searchStores = async (req, res) => {
   ).sort({ score: { $meta: 'textScore' } });
   res.json(stores);
 };
+
+exports.mapStores = async (req, res) => {
+  const coordinates = [req.query.lng, req.query.lat].map(parseFloat);
+  const query = {
+    location: {
+      $near: {
+        $geometry: {
+          type: 'Point',
+          coordinates,
+        },
+        // 10000 meters 10 km
+        $maxDistance: 10000,
+      },
+    },
+  };
+
+  const stores = await stores
+    .find(query)
+    .select('name slug description location')
+    .limit(15);
+  res.json(stores);
+};

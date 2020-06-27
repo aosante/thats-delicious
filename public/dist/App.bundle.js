@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 30);
+/******/ 	return __webpack_require__(__webpack_require__.s = 31);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -984,7 +984,7 @@ var _axios = __webpack_require__(12);
 
 var _axios2 = _interopRequireDefault(_axios);
 
-var _dompurify = __webpack_require__(32);
+var _dompurify = __webpack_require__(30);
 
 var _dompurify2 = _interopRequireDefault(_dompurify);
 
@@ -1865,35 +1865,6 @@ module.exports = function spread(callback) {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-
-
-__webpack_require__(11);
-
-var _bling = __webpack_require__(9);
-
-var _autoComplete = __webpack_require__(8);
-
-var _autoComplete2 = _interopRequireDefault(_autoComplete);
-
-var _typeAhead = __webpack_require__(10);
-
-var _typeAhead2 = _interopRequireDefault(_typeAhead);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-(0, _autoComplete2.default)((0, _bling.$)('#address'), (0, _bling.$)('#lat'), (0, _bling.$)('#lng'));
-// $ is a replacement for document.querySelector
-// $$ is a replacement for document.querySelectorAll
-
-
-(0, _typeAhead2.default)((0, _bling.$)('.search'));
-
-/***/ }),
-/* 31 */,
-/* 32 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
 var __WEBPACK_AMD_DEFINE_RESULT__;
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -2752,6 +2723,34 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 
     return DOMPurify;
 });
+
+/***/ }),
+/* 31 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+__webpack_require__(11);
+
+var _bling = __webpack_require__(9);
+
+var _autoComplete = __webpack_require__(8);
+
+var _autoComplete2 = _interopRequireDefault(_autoComplete);
+
+var _typeAhead = __webpack_require__(10);
+
+var _typeAhead2 = _interopRequireDefault(_typeAhead);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+(0, _autoComplete2.default)((0, _bling.$)('#address'), (0, _bling.$)('#lat'), (0, _bling.$)('#lng'));
+// $ is a replacement for document.querySelector
+// $$ is a replacement for document.querySelectorAll
+
+
+(0, _typeAhead2.default)((0, _bling.$)('.search'));
 
 /***/ })
 /******/ ]);

@@ -143,9 +143,12 @@ exports.mapStores = async (req, res) => {
     },
   };
 
-  const stores = await stores
-    .find(query)
-    .select('name slug description location')
+  const stores = await Store.find(query)
+    .select('name slug description location photo')
     .limit(15);
   res.json(stores);
+};
+
+exports.mapPage = async (req, res) => {
+  res.render('map', { title: 'Map' });
 };

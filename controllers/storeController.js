@@ -152,3 +152,18 @@ exports.mapStores = async (req, res) => {
 exports.mapPage = async (req, res) => {
   res.render('map', { title: 'Map' });
 };
+
+exports.heartStores = async (req, res) => {
+  // we get the array of object ids and we covert them into strings
+  const hearts = req.user.hearts.map((obj) => obj.toString());
+
+  // *pull removes from the hearts array
+  // *addToSet is used (instead of push) because we want it to be unique
+  const operator = hearts.includes(req.params.id) ? '$pull' : '$addToSet';
+  const user = await User.findByIdAndUpdate(
+    req.user._id,
+    { [operator]: { hearts: req.params.id } },
+    { new: true }
+  );
+  res.json(user);
+};

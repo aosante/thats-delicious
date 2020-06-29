@@ -21,6 +21,7 @@ const userSchema = new Schema({
   },
   resetPasswordToken: String,
   resetPasswordExpires: Date,
+  hearts: [{ type: Schema.Types.ObjectId, ref: 'Store' }],
 });
 
 // pull the user's gravatar from the internet

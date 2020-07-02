@@ -5,6 +5,7 @@ require('dotenv').config({ path: 'variables.env' });
 // Connect to our Database and handle any bad connections
 require('./models/Store');
 require('./models/User');
+require('./models/Review');
 mongoose
   .connect(process.env.DATABASE, {
     useUnifiedTopology: true,

@@ -79,7 +79,34 @@ storeSchema.statics.getTagsList = function () {
 
 // method and aggregation to get the top stores based on average rating from all reviews
 storeSchema.statics.getTopStores = function () {
-  return this.aggregate({});
+  return this.aggregate([
+    // Lookup Stores and populate their reviews (similar to the virtual method below)
+    {
+      $lookup: {
+        // Mongo takes the model name (Review), and adds an 's' at the end and lowercases it
+        from: 'reviews',
+        localField: '_id',
+        foreignField: 'store',
+        as: 'reviews',
+      },
+    },
+    // filter for only items that have 2 or more reviews
+    { $match: { 'reviews.1': { $exists: true } } },
+    // Add the average reviews field
+    {
+      $project: {
+        photo: '$$ROOT.photo',
+        name: '$$ROOT.name',
+        reviews: '$$ROOT.reviews',
+        slug: '$$ROOT.slug',
+        averageRating: { $avg: '$reviews.rating' },
+      },
+    },
+    // sort it by our new field, highest reviews first
+    { $sort: { averageRating: -1 } },
+    // limit to at most 15
+    { $limit: 15 },
+  ]);
 };
 
 // this mongoose method finds reviews where store's _id === the review's store property in order to fetch the store's reviews

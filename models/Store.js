@@ -121,7 +121,7 @@ function autoPopulate(next) {
   next();
 }
 
-storeSchema.pre('find', autopopulate);
-storeSchema.pre('findOne', autopopulate);
+storeSchema.pre('find', autoPopulate);
+storeSchema.pre('findOne', autoPopulate);
 
 module.exports = mongoose.model('Store', storeSchema);

@@ -77,7 +77,12 @@ storeSchema.statics.getTagsList = function () {
   ]);
 };
 
-// this mongoose method finds reviews where store's _id === the review's store property
+// method and aggregation to get the top stores based on average rating from all reviews
+storeSchema.statics.getTopStores = function () {
+  return this.aggregate({});
+};
+
+// this mongoose method finds reviews where store's _id === the review's store property in order to fetch the store's reviews
 storeSchema.virtual('reviews', {
   ref: 'Review', // links the store model to the review model
   localField: '_id', // the field on the store model

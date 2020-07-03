@@ -116,4 +116,12 @@ storeSchema.virtual('reviews', {
   foreignField: 'store', // the field on the review model
 });
 
+function autoPopulate(next) {
+  this.populate('reviews');
+  next();
+}
+
+storeSchema.pre('find', autopopulate);
+storeSchema.pre('findOne', autopopulate);
+
 module.exports = mongoose.model('Store', storeSchema);
